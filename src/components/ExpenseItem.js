@@ -1,14 +1,18 @@
 import "./ExpenseItem.css";
 
 function ExpenseItem() {
-  //   return문 마다 Root가 1개씩(Only) 있어야 한다. (중요!!)
+  const expenseDate = new Date(2021, 2, 28);
+  const expenseTitle = "Car Insurance";
+  const expenseAmount = 294.67;
+  // 컴포넌트는 재사용가능하게끔 해야함
+  // 따라서, Hard Coding된 것들을 일반적 JS 코드로 작성가능 + JSX의 {}안에 작성하면 된다.
   return (
     <div className="expense-item">
-      <div>March 28th 2021</div>
+      <div>{expenseDate.toISOString()}</div>
       <div className="expense-item__description">
-        <h2>Car Insurance</h2>
+        <h2>{expenseTitle}</h2>
       </div>
-      <div className="expense-item__price">$294.67</div>
+      <div className="expense-item__price">${expenseAmount}</div>
     </div>
   );
 }

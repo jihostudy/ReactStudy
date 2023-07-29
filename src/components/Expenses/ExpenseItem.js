@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 //Styles
 import "./ExpenseItem.css";
 
@@ -9,10 +9,12 @@ import ExpenseDate from "./ExpenseDate";
 import Card from "../UI/Card";
 
 const ExpenseItem = (props) => {
-  let title = props.title;
+  //props.title은 상태의 기본값 => useState는 길이가 2인 배열 반환
+  //첫번째 원소 : 현재 상태, 두번째 원소 : Setter 함수
+  const [title, setTitle] = useState(props.title);
 
   const clickHandler = () => {
-    title = "Changed!";
+    setTitle("Updated!");
     console.log(title);
   };
 

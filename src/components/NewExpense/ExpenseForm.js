@@ -4,7 +4,7 @@ import React, { useState } from "react";
 //Styles
 import "./ExpenseForm.css";
 
-const ExpenseForm = () => {
+const ExpenseForm = (props) => {
   const [enteredTitle, setEnteredTitle] = useState("");
   const [enteredAmount, setEnteredAmount] = useState("");
   const [enteredDate, setEnteredDate] = useState("");
@@ -28,15 +28,13 @@ const ExpenseForm = () => {
       date: new Date(enteredDate),
     };
 
-    console.log(expenseData);
+    props.onSaveExpenseData(expenseData);
     setEnteredTitle("");
     setEnteredAmount("");
     setEnteredDate("");
   };
 
   return (
-    //폼은 제출할때 form에 Listener를 연결시켜주면 된다.
-    //폼은 제출하면 자동으로 서버로 데이터를 전달하면서 Reload된다 (서버가 없는 경우 그냥 데이터가 날라가는 것)
     <form onSubmit={submitHandler}>
       <div className="new-expense__controls">
         <div className="new-expense__control">

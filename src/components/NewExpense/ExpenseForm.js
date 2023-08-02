@@ -9,38 +9,36 @@ const ExpenseForm = () => {
   const [enteredAmount, setEnteredAmount] = useState("");
   const [enteredDate, setEnteredDate] = useState("");
 
-  // const titleChangeHandler = (event) => {
-  //   setEnteredTitle(event.target.value);
-  // };
-  // const amountChangeHandler = (event) => {
-  //   setEnteredAmount(event.target.value);
-  // };
-  // const dateChangeHandler = (event) => {
-  //   setEnteredDate(event.target.value);
-  // };
+  const titleChangeHandler = (event) => {
+    setEnteredTitle(event.target.value);
+  };
+  const amountChangeHandler = (event) => {
+    setEnteredAmount(event.target.value);
+  };
+  const dateChangeHandler = (event) => {
+    setEnteredDate(event.target.value);
+  };
 
-  const inputChangeHandler = (identifier, value) => {
-    if (identifier === "title") {
-      setEnteredTitle(value);
-    } else if (identifier === "date") {
-      setEnteredDate(value);
-    } else {
-      setEnteredAmount(value);
-    }
+  const submitHandler = (event) => {
+    event.preventDefault();
+
+    const expenseData = {
+      title: enteredTitle,
+      amount: enteredAmount,
+      date: new Date(enteredDate),
+    };
+
+    console.log(expenseData);
   };
 
   return (
-    // 폼에 submit은 form태그에 달아주면된다 + 페이지 리로딩된다.
-    <form>
+    //폼은 제출할때 form에 Listener를 연결시켜주면 된다.
+    //폼은 제출하면 자동으로 서버로 데이터를 전달한다 (서버가 없는 경우 그냥 데이터가 날라가는 것)
+    <form onSubmit={submitHandler}>
       <div className="new-expense__controls">
         <div className="new-expense__control">
           <label>Title</label>
-          <input
-            type="text"
-            onChange={(event) => {
-              inputChangeHandler("title", event.target.value);
-            }}
-          />
+          <input type="text" onChange={titleChangeHandler} />
         </div>
 
         <div className="new-expense__control">
@@ -49,9 +47,7 @@ const ExpenseForm = () => {
             type="number"
             min="0.01"
             step="0.01"
-            onChange={(event) => {
-              inputChangeHandler("amount", event.target.value);
-            }}
+            onChange={amountChangeHandler}
           />
         </div>
 
@@ -61,9 +57,7 @@ const ExpenseForm = () => {
             type="date"
             min="2019-01-01"
             max="2022-12-31"
-            onChange={(event) => {
-              inputChangeHandler("date", event.target.value);
-            }}
+            onChange={dateChangeHandler}
           />
         </div>
       </div>
